@@ -127,10 +127,13 @@ object CommonHelper {
     fun stringToTime(timeValue: String): Boolean {
         val values = timeValue.split(" ")
         val time = values[0].split(":")
-        return if (values[1] == "PM") {
-            time[0].toInt() >= 6
+        if (values[1] == "PM") {
+            return time[0].toInt() >= 6
         } else {
-            time[0].toInt() < 6
+            if (time[0].toInt() == 12) {
+                return true
+            }
+            return time[0].toInt() < 6
         }
     }
 }
